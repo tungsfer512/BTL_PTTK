@@ -1,5 +1,8 @@
 package io.team05.btl.Model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,5 +19,6 @@ public class Shipment implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "order_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     Order order;
 }

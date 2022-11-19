@@ -13,7 +13,7 @@ public class Category implements Serializable {
     String title;
     String description;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductCategory> productCategories;
 
 }

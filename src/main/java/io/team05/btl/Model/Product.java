@@ -1,5 +1,8 @@
 package io.team05.btl.Model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,20 +19,21 @@ public class Product implements Serializable {
     String description;
     String status;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductVoucher> productVouchers;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductCategory> productCategories;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Image> images;
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     User seller;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Cart> carts;
 
 }
