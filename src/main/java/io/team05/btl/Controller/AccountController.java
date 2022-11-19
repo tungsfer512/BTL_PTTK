@@ -9,12 +9,4 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AccountController {
 
-    @Autowired
-    AccountService accountService;
-
-//    @PostMapping("/api/register")
-//    public Account postRegister() {
-//
-//        return
-//    }
 }
