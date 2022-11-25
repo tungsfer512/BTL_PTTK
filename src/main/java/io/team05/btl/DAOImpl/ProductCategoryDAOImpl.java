@@ -1,11 +1,16 @@
 package io.team05.btl.DAOImpl;
 
-import io.team05.btl.Repository.ProductCategoryRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.team05.btl.DAO.ProductCategoryDAO;
+import io.team05.btl.Model.*;
+import io.team05.btl.Repository.*;
+
 @Service
-public class ProductCategoryDAOImpl {
+public class ProductCategoryDAOImpl implements ProductCategoryDAO {
     @Autowired
     ProductCategoryRepository productCategoryRepository;
 }

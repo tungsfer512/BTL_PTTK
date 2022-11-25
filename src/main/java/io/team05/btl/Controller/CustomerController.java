@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-public class CartController {
+public class CustomerController {
     @Autowired
-    CartDAOImpl cartDAOImpl;
+    CustomerDAOImpl customerDaoImpl;
 }
