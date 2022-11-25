@@ -7,16 +7,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "my_image")
-public class Image implements Serializable {
+@Table(name = "my_admin")
+public class Admin implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String path;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    Product product;
-
+    User user;
 }

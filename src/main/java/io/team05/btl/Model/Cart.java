@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "my_cart")
 public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Cart implements Serializable {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    User customer;
+    Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

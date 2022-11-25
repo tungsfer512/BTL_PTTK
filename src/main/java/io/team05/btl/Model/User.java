@@ -1,11 +1,12 @@
 package io.team05.btl.Model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-
 @Entity
-@Table(name = "user")
+@Table(name = "my_user")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,28 +15,30 @@ public class User implements Serializable {
     String email;
     String dob;
     String image;
-    String shop;
-    Double discount;
     String role;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     Account account;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name = "fullname_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     Fullname fullname;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     Address address;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Voucher> vouchers;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    Admin admin;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Product> products;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    Seller seller;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Cart> carts;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    Customer customer;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Order> orders;
 }

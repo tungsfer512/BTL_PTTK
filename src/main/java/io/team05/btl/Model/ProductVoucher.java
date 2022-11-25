@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "productvoucher")
+@Table(name = "my_product_voucher")
 public class ProductVoucher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

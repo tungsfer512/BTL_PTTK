@@ -18,7 +18,7 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    User customer;
+    Customer customer;
 
     @OneToOne
     @JoinColumn(name = "payment_id")

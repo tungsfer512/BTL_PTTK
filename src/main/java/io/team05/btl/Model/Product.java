@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
+@Table(name = "my_product")
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    User seller;
+    Seller seller;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Cart> carts;

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "productcategory")
+@Table(name = "my_product_category")
 public class ProductCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

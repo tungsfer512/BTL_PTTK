@@ -1,13 +1,10 @@
 package io.team05.btl.Model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "fullname")
+@Table(name = "my_fullname")
 public class Fullname implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +12,7 @@ public class Fullname implements Serializable {
     String firstname;
     String lastname;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "fullname", cascade = CascadeType.ALL, orphanRemoval = true)
     User user;
 
 }
