@@ -13,7 +13,7 @@ public class User implements Serializable {
     String phone;
     String email;
     String dob;
-    String avatar;
+    String image;
     String shop;
     Double discount;
     String role;
@@ -38,6 +38,4 @@ public class User implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Order> orders;
-
-
 }

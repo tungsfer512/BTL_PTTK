@@ -1,40 +1,12 @@
-package io.team05.btl.Service;
+package io.team05.btl.DAOImpl;
 
-import io.team05.btl.DAOImpl.AccountDAOImpl;
-import io.team05.btl.Model.*;
-import io.team05.btl.Repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;;
+import io.team05.btl.Repository.AccountRepository;
 
 @Service
-public class AccountService {
+public class AccountDAOImpl {
     @Autowired
-    AccountDAOImpl accountDAOImpl;
-
-//    public Account addAccount(Account account) {
-//        return accountDAOImpl.save(account);
-//    }
-
-//    public void deleteAccountById(Long id) {
-//        accountRepository.deleteById(id);
-//    }
-//
-//    public Account updateAccount(Account account) {
-//        return accountRepository.findById(account.getId()).map(existedAccount -> {
-//            existedAccount.setPassword(account.getPassword());
-//            return accountRepository.save(existedAccount);
-//        }).orElseGet(() -> {
-//            return accountRepository.save(account);
-//        });
-//    }
-//
-//    public Account getAccountById( Long id) {
-//        return accountRepository.findById(id).get();
-//    }
-//
-//    public List<Account> getAllAccount() {
-//        return accountRepository.findAll();
-//    }
+    AccountRepository accountRepository;
 }

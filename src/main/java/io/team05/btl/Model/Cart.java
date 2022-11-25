@@ -15,7 +15,7 @@ public class Cart implements Serializable {
     Integer quantity;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "customer_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     User customer;
 
@@ -23,19 +23,6 @@ public class Cart implements Serializable {
     @JoinColumn(name = "product_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     Product product;
-
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    Payment payment;
-
-    public Cart() {
-    }
-
-    public Cart(Integer quantity, User customer, Product product, Payment payment) {
-        this.quantity = quantity;
-        this.customer = customer;
-        this.product = product;
-        this.payment = payment;
-    }
 
 }
 
