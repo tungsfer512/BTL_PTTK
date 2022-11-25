@@ -13,19 +13,15 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Double amount;
-    String number;
-    String type;
-    String expdate;
-    Double cashtendered;
-    String paymentmethod;
+    String card;
+    String cvv;
+    String method;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
     Order order;
 
     @OneToOne
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "shipment_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    Cart cart;
+    Shipment shipment;
 }

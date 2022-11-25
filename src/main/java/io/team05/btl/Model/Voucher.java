@@ -15,7 +15,7 @@ public class Voucher implements Serializable {
     Long id;
     Double discount;
     Double minspent;
-    String discountunit;
+    String unit;
 
     @ManyToOne
     @JoinColumn(name = "seller_id")
