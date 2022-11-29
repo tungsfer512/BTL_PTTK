@@ -1,7 +1,8 @@
-package io.team05.btl.Repository;
+package io.team05.btl.repository;
 
-import io.team05.btl.Model.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ImageRepository extends JpaRepository<Image, Long> {
+import io.team05.btl.model.Image;
+
+public interface ImageRepository extends JpaRepository<Image, Integer> {
 }

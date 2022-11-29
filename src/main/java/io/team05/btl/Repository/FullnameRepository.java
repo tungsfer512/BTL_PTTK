@@ -1,7 +1,8 @@
-package io.team05.btl.Repository;
+package io.team05.btl.repository;
 
-import io.team05.btl.Model.Fullname;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FullnameRepository extends JpaRepository<Fullname, Long> {
+import io.team05.btl.model.Fullname;
+
+public interface FullnameRepository extends JpaRepository<Fullname, Integer> {
 }

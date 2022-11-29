@@ -1,7 +1,8 @@
-package io.team05.btl.Repository;
+package io.team05.btl.repository;
 
-import io.team05.btl.Model.Shipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ShipmentRepository extends JpaRepository<Shipment, Long> {
+import io.team05.btl.model.Shipment;
+
+public interface ShipmentRepository extends JpaRepository<Shipment, Integer> {
 }

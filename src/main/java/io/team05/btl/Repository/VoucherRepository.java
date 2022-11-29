@@ -1,7 +1,8 @@
-package io.team05.btl.Repository;
+package io.team05.btl.repository;
 
-import io.team05.btl.Model.Voucher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface VoucherRepository extends JpaRepository<Voucher, Long> {
+import io.team05.btl.model.Voucher;
+
+public interface VoucherRepository extends JpaRepository<Voucher, Integer> {
 }

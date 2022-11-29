@@ -1,7 +1,8 @@
-package io.team05.btl.Repository;
+package io.team05.btl.repository;
 
-import io.team05.btl.Model.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CartRepository extends JpaRepository<Cart, Long> {
+import io.team05.btl.model.Cart;
+
+public interface CartRepository extends JpaRepository<Cart, Integer> {
 }

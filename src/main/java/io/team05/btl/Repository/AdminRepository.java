@@ -1,7 +1,8 @@
-package io.team05.btl.Repository;
+package io.team05.btl.repository;
 
-import io.team05.btl.Model.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AdminRepository extends JpaRepository<Admin, Long> {
+import io.team05.btl.model.Admin;
+
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
 }

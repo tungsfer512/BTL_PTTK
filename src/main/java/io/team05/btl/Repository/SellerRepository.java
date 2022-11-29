@@ -1,7 +1,8 @@
-package io.team05.btl.Repository;
+package io.team05.btl.repository;
 
-import io.team05.btl.Model.Seller;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SellerRepository extends JpaRepository<Seller, Long> {
+import io.team05.btl.model.Seller;
+
+public interface SellerRepository extends JpaRepository<Seller, Integer> {
 }
