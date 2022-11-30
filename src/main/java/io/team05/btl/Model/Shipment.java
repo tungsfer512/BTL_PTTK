@@ -1,5 +1,6 @@
 package io.team05.btl.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class Shipment implements Serializable {
     @JsonManagedReference
     String address;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "shipment", cascade = CascadeType.ALL, orphanRemoval = true)
     Payment payment;
 

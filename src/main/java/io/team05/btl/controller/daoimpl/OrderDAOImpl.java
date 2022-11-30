@@ -1,5 +1,7 @@
 package io.team05.btl.controller.daoimpl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +17,38 @@ public class OrderDAOImpl implements OrderDAO {
     OrderRepository orderRepository;
 
     @Override
-    public List<Order> getAllOrder() {
-        return orderRepository.findAll();
+    public HashMap<String, ArrayList<Order>> getAllOrder() {
+        HashMap<String, ArrayList<Order>> mp = new HashMap<>();
+        ArrayList<Order> orders = (ArrayList<Order>) orderRepository.findAll();
+        for (Order order : orders) {
+            String status = order.getStatus();
+            if (mp.containsKey(status)) {
+            } else {
+                mp.put(status, new ArrayList<>());
+            }
+            mp.get(status).add(order);
+        }
+        return mp;
+    }
+
+    @Override
+    public HashMap<String, ArrayList<Order>> getAllOrderByCustomerId(Integer id) {
+        HashMap<String, ArrayList<Order>> mp = new HashMap<>();
+        ArrayList<Order> orders = (ArrayList<Order>) orderRepository.getAllOrderByCustomerId(id);
+        for (Order order : orders) {
+            String status = order.getStatus();
+            if (mp.containsKey(status)) {
+            } else {
+                mp.put(status, new ArrayList<>());
+            }
+            mp.get(status).add(order);
+        }
+        return mp;
     }
 
     @Override
     public Order getOrderById(Integer id) {
         return orderRepository.findById(id).get();
-    }
-
-    @Override
-    public List<Order> getAllOrderByCustomerId(Integer id) {
-        return orderRepository.getAllOrderByCustomerId(id);
     }
 
     @Override

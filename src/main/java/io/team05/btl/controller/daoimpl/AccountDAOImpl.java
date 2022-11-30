@@ -24,4 +24,9 @@ public class AccountDAOImpl implements AccountDAO {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public Account getAccountById(Integer id) {
+        return accountRepository.findById(id).get();
+    }
 }

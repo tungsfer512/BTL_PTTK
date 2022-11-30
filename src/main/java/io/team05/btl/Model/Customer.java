@@ -25,7 +25,7 @@ public class Customer implements Serializable {
     @JsonManagedReference
     Double discount;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Order> orders;
 

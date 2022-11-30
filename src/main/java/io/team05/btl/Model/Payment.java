@@ -24,11 +24,11 @@ public class Payment implements Serializable {
     @JsonManagedReference
     String method;
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
     Order order;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "shipment_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

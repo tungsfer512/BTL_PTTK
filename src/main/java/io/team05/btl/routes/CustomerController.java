@@ -1,5 +1,6 @@
 package io.team05.btl.routes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,8 +30,20 @@ public class CustomerController {
     PaymentDAOImpl paymentDAOImpl;
 
     @GetMapping("api/customers/{id}/cart")
-    public List<Cart> getAllCartByCustomer(@PathVariable Integer id) {
-        return cartDAOImpl.getAllCartByCustomerId(id);
+    public HashMap<Integer, ArrayList<Cart>> getAllCartByCustomer(@PathVariable Integer id) {
+        ArrayList<Cart> carts = (ArrayList<Cart>) cartDAOImpl.getAllCartByCustomerId(id);
+        HashMap<Integer, ArrayList<Cart>> mp = new HashMap<>();
+        for (Cart cart : carts) {
+            Integer sellerId = cart.getProduct().getSeller().getId();
+            System.out.println(sellerId);
+            if (mp.containsKey(sellerId)) {
+            } else {
+                mp.put(sellerId, new ArrayList<>());
+            }
+            mp.get(sellerId).add(cart);
+        }
+        // return cartDAOImpl.getAllCartByCustomerId(id);
+        return mp;
     }
 
     @PostMapping("api/customers/{id}/cart/add")

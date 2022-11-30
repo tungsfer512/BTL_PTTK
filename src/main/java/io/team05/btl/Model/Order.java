@@ -1,6 +1,5 @@
 package io.team05.btl.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import org.hibernate.annotations.OnDelete;
@@ -22,13 +21,13 @@ public class Order implements Serializable {
     @JsonManagedReference
     String status;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     Customer customer;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToOne
     @JoinColumn(name = "payment_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

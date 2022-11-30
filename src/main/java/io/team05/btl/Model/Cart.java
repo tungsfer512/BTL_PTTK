@@ -25,7 +25,7 @@ public class Cart implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     Customer customer;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "product_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

@@ -38,7 +38,7 @@ public class OrderDetail {
     @OnDelete(action = OnDeleteAction.CASCADE)
     Order order;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "product_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
