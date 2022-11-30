@@ -10,18 +10,35 @@ import java.io.Serializable;
 public class Shipment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
     @Column(columnDefinition = "TEXT")
+    @JsonManagedReference
     String note;
+    @JsonManagedReference
     Double cost;
+    @JsonManagedReference
     String method;
+    @JsonManagedReference
+    String address;
 
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "shipment", cascade = CascadeType.ALL, orphanRemoval = true)
     Payment payment;
 
+
+    public Shipment() {
+    }
+
+    public Shipment(String note, Double cost, String method, String address) {
+        this.note = note;
+        this.cost = cost;
+        this.method = method;
+        this.address = address;
+    }
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -29,7 +46,7 @@ public class Shipment implements Serializable {
     }
 
     public String getNote() {
-        return note;
+        return this.note;
     }
 
     public void setNote(String note) {
@@ -37,7 +54,7 @@ public class Shipment implements Serializable {
     }
 
     public Double getCost() {
-        return cost;
+        return this.cost;
     }
 
     public void setCost(Double cost) {
@@ -45,27 +62,56 @@ public class Shipment implements Serializable {
     }
 
     public String getMethod() {
-        return method;
+        return this.method;
     }
 
     public void setMethod(String method) {
         this.method = method;
     }
 
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Payment getPayment() {
-        return payment;
+        return this.payment;
     }
 
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
 
-    public Shipment(String note, Double cost, String method) {
-        this.note = note;
-        this.cost = cost;
-        this.method = method;
+    public Shipment id(Integer id) {
+        setId(id);
+        return this;
     }
 
-    public Shipment() {
+    public Shipment note(String note) {
+        setNote(note);
+        return this;
+    }
+
+    public Shipment cost(Double cost) {
+        setCost(cost);
+        return this;
+    }
+
+    public Shipment method(String method) {
+        setMethod(method);
+        return this;
+    }
+
+    public Shipment address(String address) {
+        setAddress(address);
+        return this;
+    }
+
+    public Shipment payment(Payment payment) {
+        setPayment(payment);
+        return this;
     }
 }

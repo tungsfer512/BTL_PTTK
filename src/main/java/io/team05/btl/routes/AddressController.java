@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.team05.btl.controller.daoimpl.FullnameDAOImpl;
-import io.team05.btl.model.Fullname;
+import io.team05.btl.controller.daoimpl.AddressDAOImpl;
+import io.team05.btl.model.Address;
 
 @RestController
 @CrossOrigin
-public class FullnameController {
+public class AddressController {
     @Autowired
-    FullnameDAOImpl fullnameDAOImpl;
+    AddressDAOImpl addressDAOImpl;
 
-    @GetMapping("/api/fullname/user/{id}")
-    public Fullname getFullnameByUser(@PathVariable Integer id) {
-        return fullnameDAOImpl.getFullnameByUserId(id);
+    @GetMapping("/api/addresses/user/{id}")
+    public Address getAddressByUser(@PathVariable Integer id) {
+        return addressDAOImpl.getAddressByUserId(id);
     }
+
+    
 }

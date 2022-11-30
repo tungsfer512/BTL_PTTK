@@ -14,9 +14,13 @@ import java.util.List;
 public class Voucher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
+    @JsonManagedReference
     Double discount;
+    @JsonManagedReference
     Double minspent;
+    @JsonManagedReference
     String unit;
 
     @JsonBackReference
@@ -29,8 +33,19 @@ public class Voucher implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "voucher", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ProductVoucher> productVouchers;
 
+
+    public Voucher() {
+    }
+
+    public Voucher( Double discount, Double minspent, String unit, User seller) {
+        this.discount = discount;
+        this.minspent = minspent;
+        this.unit = unit;
+        this.seller = seller;
+    }
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -38,7 +53,7 @@ public class Voucher implements Serializable {
     }
 
     public Double getDiscount() {
-        return discount;
+        return this.discount;
     }
 
     public void setDiscount(Double discount) {
@@ -46,7 +61,7 @@ public class Voucher implements Serializable {
     }
 
     public Double getMinspent() {
-        return minspent;
+        return this.minspent;
     }
 
     public void setMinspent(Double minspent) {
@@ -54,7 +69,7 @@ public class Voucher implements Serializable {
     }
 
     public String getUnit() {
-        return unit;
+        return this.unit;
     }
 
     public void setUnit(String unit) {
@@ -62,7 +77,7 @@ public class Voucher implements Serializable {
     }
 
     public User getSeller() {
-        return seller;
+        return this.seller;
     }
 
     public void setSeller(User seller) {
@@ -70,21 +85,40 @@ public class Voucher implements Serializable {
     }
 
     public List<ProductVoucher> getProductVouchers() {
-        return productVouchers;
+        return this.productVouchers;
     }
 
     public void setProductVouchers(List<ProductVoucher> productVouchers) {
         this.productVouchers = productVouchers;
     }
 
-    public Voucher(Double discount, Double minspent, String unit, User seller, List<ProductVoucher> productVouchers) {
-        this.discount = discount;
-        this.minspent = minspent;
-        this.unit = unit;
-        this.seller = seller;
-        this.productVouchers = productVouchers;
+    public Voucher id(Integer id) {
+        setId(id);
+        return this;
     }
 
-    public Voucher() {
+    public Voucher discount(Double discount) {
+        setDiscount(discount);
+        return this;
+    }
+
+    public Voucher minspent(Double minspent) {
+        setMinspent(minspent);
+        return this;
+    }
+
+    public Voucher unit(String unit) {
+        setUnit(unit);
+        return this;
+    }
+
+    public Voucher seller(User seller) {
+        setSeller(seller);
+        return this;
+    }
+
+    public Voucher productVouchers(List<ProductVoucher> productVouchers) {
+        setProductVouchers(productVouchers);
+        return this;
     }
 }

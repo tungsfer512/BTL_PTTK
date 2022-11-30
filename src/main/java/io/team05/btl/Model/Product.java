@@ -14,12 +14,18 @@ import java.util.List;
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
+    @JsonManagedReference
     String title;
+    @JsonManagedReference
     Integer quantity;
+    @JsonManagedReference
     Double price;
     @Column(columnDefinition = "TEXT")
+    @JsonManagedReference
     String description;
+    @JsonManagedReference
     String status;
 
     @JsonManagedReference
@@ -33,6 +39,10 @@ public class Product implements Serializable {
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Image> images;
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<OrderDetail> orderdetails;
 
     @JsonBackReference
     @ManyToOne
@@ -48,8 +58,23 @@ public class Product implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Comment> comments;
 
+
+    public Product() {
+    }
+
+    public Product( String title, Integer quantity, Double price, String description, String status, List<ProductCategory> productCategories, List<Image> images, Seller seller) {
+        this.title = title;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.status = status;
+        this.productCategories = productCategories;
+        this.images = images;
+        this.seller = seller;
+    }
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -57,7 +82,7 @@ public class Product implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -65,7 +90,7 @@ public class Product implements Serializable {
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void setQuantity(Integer quantity) {
@@ -73,7 +98,7 @@ public class Product implements Serializable {
     }
 
     public Double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(Double price) {
@@ -81,7 +106,7 @@ public class Product implements Serializable {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
@@ -89,7 +114,7 @@ public class Product implements Serializable {
     }
 
     public String getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(String status) {
@@ -97,7 +122,7 @@ public class Product implements Serializable {
     }
 
     public List<ProductVoucher> getProductVouchers() {
-        return productVouchers;
+        return this.productVouchers;
     }
 
     public void setProductVouchers(List<ProductVoucher> productVouchers) {
@@ -105,7 +130,7 @@ public class Product implements Serializable {
     }
 
     public List<ProductCategory> getProductCategories() {
-        return productCategories;
+        return this.productCategories;
     }
 
     public void setProductCategories(List<ProductCategory> productCategories) {
@@ -113,15 +138,23 @@ public class Product implements Serializable {
     }
 
     public List<Image> getImages() {
-        return images;
+        return this.images;
     }
 
     public void setImages(List<Image> images) {
         this.images = images;
     }
 
+    public List<OrderDetail> getOrderdetails() {
+        return this.orderdetails;
+    }
+
+    public void setOrderdetails(List<OrderDetail> orderdetails) {
+        this.orderdetails = orderdetails;
+    }
+
     public Seller getSeller() {
-        return seller;
+        return this.seller;
     }
 
     public void setSeller(Seller seller) {
@@ -129,23 +162,83 @@ public class Product implements Serializable {
     }
 
     public List<Cart> getCarts() {
-        return carts;
+        return this.carts;
     }
 
     public void setCarts(List<Cart> carts) {
         this.carts = carts;
     }
 
-    public Product(String title, Integer quantity, Double price, String description, String status, List<Image> images, Seller seller) {
-        this.title = title;
-        this.quantity = quantity;
-        this.price = price;
-        this.description = description;
-        this.status = status;
-        this.images = images;
-        this.seller = seller;
+    public List<Comment> getComments() {
+        return this.comments;
     }
 
-    public Product() {
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Product id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Product title(String title) {
+        setTitle(title);
+        return this;
+    }
+
+    public Product quantity(Integer quantity) {
+        setQuantity(quantity);
+        return this;
+    }
+
+    public Product price(Double price) {
+        setPrice(price);
+        return this;
+    }
+
+    public Product description(String description) {
+        setDescription(description);
+        return this;
+    }
+
+    public Product status(String status) {
+        setStatus(status);
+        return this;
+    }
+
+    public Product productVouchers(List<ProductVoucher> productVouchers) {
+        setProductVouchers(productVouchers);
+        return this;
+    }
+
+    public Product productCategories(List<ProductCategory> productCategories) {
+        setProductCategories(productCategories);
+        return this;
+    }
+
+    public Product images(List<Image> images) {
+        setImages(images);
+        return this;
+    }
+
+    public Product orderdetails(List<OrderDetail> orderdetails) {
+        setOrderdetails(orderdetails);
+        return this;
+    }
+
+    public Product seller(Seller seller) {
+        setSeller(seller);
+        return this;
+    }
+
+    public Product carts(List<Cart> carts) {
+        setCarts(carts);
+        return this;
+    }
+
+    public Product comments(List<Comment> comments) {
+        setComments(comments);
+        return this;
     }
 }

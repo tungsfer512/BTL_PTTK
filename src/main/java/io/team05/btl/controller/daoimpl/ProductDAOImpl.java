@@ -1,5 +1,6 @@
 package io.team05.btl.controller.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,37 +15,42 @@ public class ProductDAOImpl implements ProductDAO {
     @Autowired
     ProductRepository productRepository;
 
+    @Override
     public List<Product> getAllProduct() {
         return productRepository.findAll();
     }
 
     @Override
     public List<Product> getAllProductByCategoryId(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Integer> product_ids = productRepository.getAllProductIdByCategoryId(id);
+        return productRepository.findAllById(product_ids);
     }
 
     @Override
     public Product getProductById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return productRepository.findById(id).get();
     }
 
     @Override
     public List<Product> getAllProductByShopId(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return productRepository.getAllProductBySellerId(id);
     }
 
     @Override
     public Seller getShopByProductId(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        Product product = productRepository.findById(id).get();
+        return product.getSeller();
     }
 
     @Override
     public List<Product> getAllProductByCategoryIdInShop(Integer categoryId, Integer shopId) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Product> products = getAllProductByCategoryId(categoryId);
+        List<Product> productsInShop = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getSeller().getId() == shopId) {
+                productsInShop.add(product);
+            }
+        }
+        return productsInShop;
     }
 }

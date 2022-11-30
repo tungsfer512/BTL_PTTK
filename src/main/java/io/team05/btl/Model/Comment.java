@@ -16,18 +16,23 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "my_comment")
 public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
 
     @Column(columnDefinition = "TEXT")
+    @JsonManagedReference
     String content;
 
+    @JsonManagedReference
     Double rate;
+    @JsonManagedReference
     String createdAt;
 
     @JsonBackReference
@@ -49,5 +54,108 @@ public class Comment implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     OrderDetail orderdetail;
 
+
+    public Comment() {
+    }
+
+    public Comment(String content, Double rate, String createdAt, Customer customer, Product product, OrderDetail orderdetail) {
+        this.content = content;
+        this.rate = rate;
+        this.createdAt = createdAt;
+        this.customer = customer;
+        this.product = product;
+        this.orderdetail = orderdetail;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Double getRate() {
+        return this.rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
+    public String getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Product getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public OrderDetail getOrderdetail() {
+        return this.orderdetail;
+    }
+
+    public void setOrderdetail(OrderDetail orderdetail) {
+        this.orderdetail = orderdetail;
+    }
+
+    public Comment id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Comment content(String content) {
+        setContent(content);
+        return this;
+    }
+
+    public Comment rate(Double rate) {
+        setRate(rate);
+        return this;
+    }
+
+    public Comment createdAt(String createdAt) {
+        setCreatedAt(createdAt);
+        return this;
+    }
+
+    public Comment customer(Customer customer) {
+        setCustomer(customer);
+        return this;
+    }
+
+    public Comment product(Product product) {
+        setProduct(product);
+        return this;
+    }
+
+    public Comment orderdetail(OrderDetail orderdetail) {
+        setOrderdetail(orderdetail);
+        return this;
+    }
 
 }

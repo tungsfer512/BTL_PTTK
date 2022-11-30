@@ -11,9 +11,8 @@ import io.team05.btl.model.Product;
 
 public interface CustomerDAO {
     public List<Product> filterInAll();
-    public List<Product> filterInShop();
-    public List<Product> searchInAll();
-    public List<Product> searchInShop();
+    public List<Product> searchInAll(String keyword);
+    public List<Product> searchInShop(String keyword, Integer seller_id);
     public Customer getCustomerById(Integer id);
     public Cart addCart(Cart cart);
     public Cart updateCart(Cart cart);

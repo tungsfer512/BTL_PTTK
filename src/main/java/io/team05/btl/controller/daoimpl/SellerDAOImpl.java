@@ -28,8 +28,7 @@ public class SellerDAOImpl implements SellerDAO {
     }
     @Override
     public Seller getSellerById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return sellerRepository.findById(id).get();
     }
     @Override
     public Product addProduct(Product product) {

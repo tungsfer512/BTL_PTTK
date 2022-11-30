@@ -12,11 +12,17 @@ import java.io.Serializable;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
+    @JsonManagedReference
     String phone;
+    @JsonManagedReference
     String email;
+    @JsonManagedReference
     String dob;
+    @JsonManagedReference
     String image;
+    @JsonManagedReference
     String role;
 
     @JsonBackReference
@@ -49,8 +55,20 @@ public class User implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     Customer customer;
 
+
+    public User() {
+    }
+
+    public User(String phone, String email, String dob, String image, String role) {
+        this.phone = phone;
+        this.email = email;
+        this.dob = dob;
+        this.image = image;
+        this.role = role;
+    }
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -58,7 +76,7 @@ public class User implements Serializable {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
@@ -66,7 +84,7 @@ public class User implements Serializable {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -74,7 +92,7 @@ public class User implements Serializable {
     }
 
     public String getDob() {
-        return dob;
+        return this.dob;
     }
 
     public void setDob(String dob) {
@@ -82,7 +100,7 @@ public class User implements Serializable {
     }
 
     public String getImage() {
-        return image;
+        return this.image;
     }
 
     public void setImage(String image) {
@@ -90,7 +108,7 @@ public class User implements Serializable {
     }
 
     public String getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(String role) {
@@ -98,7 +116,7 @@ public class User implements Serializable {
     }
 
     public Account getAccount() {
-        return account;
+        return this.account;
     }
 
     public void setAccount(Account account) {
@@ -106,7 +124,7 @@ public class User implements Serializable {
     }
 
     public Fullname getFullname() {
-        return fullname;
+        return this.fullname;
     }
 
     public void setFullname(Fullname fullname) {
@@ -114,7 +132,7 @@ public class User implements Serializable {
     }
 
     public Address getAddress() {
-        return address;
+        return this.address;
     }
 
     public void setAddress(Address address) {
@@ -122,7 +140,7 @@ public class User implements Serializable {
     }
 
     public Admin getAdmin() {
-        return admin;
+        return this.admin;
     }
 
     public void setAdmin(Admin admin) {
@@ -130,7 +148,7 @@ public class User implements Serializable {
     }
 
     public Seller getSeller() {
-        return seller;
+        return this.seller;
     }
 
     public void setSeller(Seller seller) {
@@ -138,24 +156,71 @@ public class User implements Serializable {
     }
 
     public Customer getCustomer() {
-        return customer;
+        return this.customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public User(String phone, String email, String dob, String image, String role, Account account, Fullname fullname, Address address) {
-        this.phone = phone;
-        this.email = email;
-        this.dob = dob;
-        this.image = image;
-        this.role = role;
-        this.account = account;
-        this.fullname = fullname;
-        this.address = address;
+    public User id(Integer id) {
+        setId(id);
+        return this;
     }
 
-    public User() {
+    public User phone(String phone) {
+        setPhone(phone);
+        return this;
     }
+
+    public User email(String email) {
+        setEmail(email);
+        return this;
+    }
+
+    public User dob(String dob) {
+        setDob(dob);
+        return this;
+    }
+
+    public User image(String image) {
+        setImage(image);
+        return this;
+    }
+
+    public User role(String role) {
+        setRole(role);
+        return this;
+    }
+
+    public User account(Account account) {
+        setAccount(account);
+        return this;
+    }
+
+    public User fullname(Fullname fullname) {
+        setFullname(fullname);
+        return this;
+    }
+
+    public User address(Address address) {
+        setAddress(address);
+        return this;
+    }
+
+    public User admin(Admin admin) {
+        setAdmin(admin);
+        return this;
+    }
+
+    public User seller(Seller seller) {
+        setSeller(seller);
+        return this;
+    }
+
+    public User customer(Customer customer) {
+        setCustomer(customer);
+        return this;
+    }
+
 }

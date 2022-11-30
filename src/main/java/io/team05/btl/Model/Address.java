@@ -10,21 +10,26 @@ import javax.persistence.*;
 public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
-
+    @JsonManagedReference
     String street;
+    @JsonManagedReference
     String town;
+    @JsonManagedReference
     String district;
+    @JsonManagedReference
     String city;
 
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
     User user;
 
+
     public Address() {
     }
 
-    public Address(String street, String town, String district, String city, User user) {
+    public Address( String street, String town, String district, String city, User user) {
         this.street = street;
         this.town = town;
         this.district = district;
@@ -33,7 +38,7 @@ public class Address implements Serializable {
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -41,7 +46,7 @@ public class Address implements Serializable {
     }
 
     public String getStreet() {
-        return street;
+        return this.street;
     }
 
     public void setStreet(String street) {
@@ -49,7 +54,7 @@ public class Address implements Serializable {
     }
 
     public String getTown() {
-        return town;
+        return this.town;
     }
 
     public void setTown(String town) {
@@ -57,7 +62,7 @@ public class Address implements Serializable {
     }
 
     public String getDistrict() {
-        return district;
+        return this.district;
     }
 
     public void setDistrict(String district) {
@@ -65,7 +70,7 @@ public class Address implements Serializable {
     }
 
     public String getCity() {
-        return city;
+        return this.city;
     }
 
     public void setCity(String city) {
@@ -73,10 +78,41 @@ public class Address implements Serializable {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Address id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Address street(String street) {
+        setStreet(street);
+        return this;
+    }
+
+    public Address town(String town) {
+        setTown(town);
+        return this;
+    }
+
+    public Address district(String district) {
+        setDistrict(district);
+        return this;
+    }
+
+    public Address city(String city) {
+        setCity(city);
+        return this;
+    }
+
+    public Address user(User user) {
+        setUser(user);
+        return this;
+    }
+    
 }

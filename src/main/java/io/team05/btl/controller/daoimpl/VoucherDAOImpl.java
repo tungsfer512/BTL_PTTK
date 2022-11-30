@@ -16,8 +16,7 @@ public class VoucherDAOImpl implements VoucherDAO {
 
     @Override
     public List<Voucher> getAllVoucher() {
-        // TODO Auto-generated method stub
-        return null;
+        return voucherRepository.findAll();
     }
 
     @Override
@@ -34,7 +33,6 @@ public class VoucherDAOImpl implements VoucherDAO {
 
     @Override
     public Voucher getVoucherById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return voucherRepository.findById(id).get();
     }
 }

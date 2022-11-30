@@ -20,8 +20,7 @@ public class ImageDAOImpl implements ImageDAO {
 
     @Override
     public List<Image> getAllImageByProductId(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return imageRepository.getAllImageByProductId(id);
     }
 
 }

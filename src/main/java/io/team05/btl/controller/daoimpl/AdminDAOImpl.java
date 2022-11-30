@@ -16,11 +16,18 @@ import io.team05.btl.repository.*;
 public class AdminDAOImpl implements AdminDAO {
     @Autowired
     AdminRepository adminRepository;
+    @Autowired
+    SellerRepository sellerRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public void deleteUserById(Integer id) {
-        // TODO Auto-generated method stub
-        
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -31,8 +38,7 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public Category addCategory(Category category) {
-        // TODO Auto-generated method stub
-        return null;
+        return categoryRepository.save(category);
     }
 
     @Override
@@ -43,19 +49,16 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public void deletecategoryById(Integer id) {
-        // TODO Auto-generated method stub
-        
+        categoryRepository.deleteById(id);
     }
 
     @Override
     public List<Seller> getAllSeller() {
-        // TODO Auto-generated method stub
-        return null;
+        return sellerRepository.findAll();
     }
 
     @Override
     public List<Customer> getAllCustomer() {
-        // TODO Auto-generated method stub
-        return null;
+        return customerRepository.findAll();
     }
 }

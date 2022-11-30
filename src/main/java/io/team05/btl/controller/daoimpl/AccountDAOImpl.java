@@ -14,11 +14,6 @@ public class AccountDAOImpl implements AccountDAO {
     AccountRepository accountRepository;
 
     @Override
-    public Account getAccountByUsername(String username) {
-        return accountRepository.getAccountByUsername(username);
-    }
-
-    @Override
     public Account logIn(Account account) {
         // TODO Auto-generated method stub
         return null;

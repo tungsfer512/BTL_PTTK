@@ -13,10 +13,15 @@ import java.io.Serializable;
 public class Payment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
+    @JsonManagedReference
     Double amount;
+    @JsonManagedReference
     String card;
+    @JsonManagedReference
     String cvv;
+    @JsonManagedReference
     String method;
 
     @JsonManagedReference
@@ -29,8 +34,20 @@ public class Payment implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     Shipment shipment;
 
+
+    public Payment() {
+    }
+
+    public Payment(Double amount, String card, String cvv, String method, Shipment shipment) {
+        this.amount = amount;
+        this.card = card;
+        this.cvv = cvv;
+        this.method = method;
+        this.shipment = shipment;
+    }
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -38,7 +55,7 @@ public class Payment implements Serializable {
     }
 
     public Double getAmount() {
-        return amount;
+        return this.amount;
     }
 
     public void setAmount(Double amount) {
@@ -46,7 +63,7 @@ public class Payment implements Serializable {
     }
 
     public String getCard() {
-        return card;
+        return this.card;
     }
 
     public void setCard(String card) {
@@ -54,7 +71,7 @@ public class Payment implements Serializable {
     }
 
     public String getCvv() {
-        return cvv;
+        return this.cvv;
     }
 
     public void setCvv(String cvv) {
@@ -62,7 +79,7 @@ public class Payment implements Serializable {
     }
 
     public String getMethod() {
-        return method;
+        return this.method;
     }
 
     public void setMethod(String method) {
@@ -70,7 +87,7 @@ public class Payment implements Serializable {
     }
 
     public Order getOrder() {
-        return order;
+        return this.order;
     }
 
     public void setOrder(Order order) {
@@ -78,22 +95,46 @@ public class Payment implements Serializable {
     }
 
     public Shipment getShipment() {
-        return shipment;
+        return this.shipment;
     }
 
     public void setShipment(Shipment shipment) {
         this.shipment = shipment;
     }
 
-    public Payment(Double amount, String card, String cvv, String method, Order order, Shipment shipment) {
-        this.amount = amount;
-        this.card = card;
-        this.cvv = cvv;
-        this.method = method;
-        this.order = order;
-        this.shipment = shipment;
+    public Payment id(Integer id) {
+        setId(id);
+        return this;
     }
 
-    public Payment() {
+    public Payment amount(Double amount) {
+        setAmount(amount);
+        return this;
     }
+
+    public Payment card(String card) {
+        setCard(card);
+        return this;
+    }
+
+    public Payment cvv(String cvv) {
+        setCvv(cvv);
+        return this;
+    }
+
+    public Payment method(String method) {
+        setMethod(method);
+        return this;
+    }
+
+    public Payment order(Order order) {
+        setOrder(order);
+        return this;
+    }
+
+    public Payment shipment(Shipment shipment) {
+        setShipment(shipment);
+        return this;
+    }
+    
 }

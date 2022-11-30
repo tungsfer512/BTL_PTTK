@@ -10,13 +10,17 @@ import java.io.Serializable;
 public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
+    @JsonManagedReference
     String username;
+    @JsonManagedReference
     String password;
 
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     User user;
+
 
     public Account() {
     }
@@ -28,7 +32,7 @@ public class Account implements Serializable {
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -36,7 +40,7 @@ public class Account implements Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -44,7 +48,7 @@ public class Account implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -52,10 +56,31 @@ public class Account implements Serializable {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {
         this.user = user;
     }
+
+    public Account id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Account username(String username) {
+        setUsername(username);
+        return this;
+    }
+
+    public Account password(String password) {
+        setPassword(password);
+        return this;
+    }
+
+    public Account user(User user) {
+        setUser(user);
+        return this;
+    }
+
 }

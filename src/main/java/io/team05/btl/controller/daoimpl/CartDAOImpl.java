@@ -16,7 +16,6 @@ public class CartDAOImpl implements CartDAO {
 
     @Override
     public List<Cart> getAllCartByCustomerId(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return cartRepository.getAllCartByCustomerId(id);
     }
 }

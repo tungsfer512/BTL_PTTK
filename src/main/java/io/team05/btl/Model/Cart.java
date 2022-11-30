@@ -1,6 +1,8 @@
 package io.team05.btl.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,7 +14,9 @@ import java.io.Serializable;
 public class Cart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @JsonManagedReference
+    Integer id;
+    @JsonManagedReference
     Integer quantity;
 
     @JsonBackReference
@@ -27,6 +31,7 @@ public class Cart implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     Product product;
 
+
     public Cart() {
     }
 
@@ -36,16 +41,16 @@ public class Cart implements Serializable {
         this.product = product;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     public Integer getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public void setQuantity(Integer quantity) {
@@ -53,7 +58,7 @@ public class Cart implements Serializable {
     }
 
     public Customer getCustomer() {
-        return customer;
+        return this.customer;
     }
 
     public void setCustomer(Customer customer) {
@@ -61,11 +66,31 @@ public class Cart implements Serializable {
     }
 
     public Product getProduct() {
-        return product;
+        return this.product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Cart id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Cart quantity(Integer quantity) {
+        setQuantity(quantity);
+        return this;
+    }
+
+    public Cart customer(Customer customer) {
+        setCustomer(customer);
+        return this;
+    }
+
+    public Cart product(Product product) {
+        setProduct(product);
+        return this;
     }
 }
 

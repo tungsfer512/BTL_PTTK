@@ -1,6 +1,8 @@
 package io.team05.btl.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +14,7 @@ import java.io.Serializable;
 public class ProductVoucher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
 
     @JsonBackReference
@@ -26,8 +29,17 @@ public class ProductVoucher implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     Voucher voucher;
 
+
+    public ProductVoucher() {
+    }
+
+    public ProductVoucher( Product product, Voucher voucher) {
+        this.product = product;
+        this.voucher = voucher;
+    }
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -35,7 +47,7 @@ public class ProductVoucher implements Serializable {
     }
 
     public Product getProduct() {
-        return product;
+        return this.product;
     }
 
     public void setProduct(Product product) {
@@ -43,18 +55,25 @@ public class ProductVoucher implements Serializable {
     }
 
     public Voucher getVoucher() {
-        return voucher;
+        return this.voucher;
     }
 
     public void setVoucher(Voucher voucher) {
         this.voucher = voucher;
     }
 
-    public ProductVoucher(Product product, Voucher voucher) {
-        this.product = product;
-        this.voucher = voucher;
+    public ProductVoucher id(Integer id) {
+        setId(id);
+        return this;
     }
 
-    public ProductVoucher() {
+    public ProductVoucher product(Product product) {
+        setProduct(product);
+        return this;
+    }
+
+    public ProductVoucher voucher(Voucher voucher) {
+        setVoucher(voucher);
+        return this;
     }
 }

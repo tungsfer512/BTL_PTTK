@@ -14,6 +14,7 @@ import java.util.List;
 public class Seller implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
 
     @JsonBackReference
@@ -22,6 +23,7 @@ public class Seller implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     User user;
     
+    @JsonManagedReference
     String shop;
 
     @JsonManagedReference
@@ -32,36 +34,8 @@ public class Seller implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Product> products;
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getShop() {
-        return shop;
-    }
-
-    public void setShop(String shop) {
-        this.shop = shop;
-    }
-
-    public List<Voucher> getVouchers() {
-        return vouchers;
-    }
-
-    public void setVouchers(List<Voucher> vouchers) {
-        this.vouchers = vouchers;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public Seller() {
     }
 
     public Seller(User user, String shop) {
@@ -69,6 +43,69 @@ public class Seller implements Serializable {
         this.shop = shop;
     }
 
-    public Seller() {
+    public Integer getId() {
+        return this.id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getShop() {
+        return this.shop;
+    }
+
+    public void setShop(String shop) {
+        this.shop = shop;
+    }
+
+    public List<Voucher> getVouchers() {
+        return this.vouchers;
+    }
+
+    public void setVouchers(List<Voucher> vouchers) {
+        this.vouchers = vouchers;
+    }
+
+    public List<Product> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public Seller id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Seller user(User user) {
+        setUser(user);
+        return this;
+    }
+
+    public Seller shop(String shop) {
+        setShop(shop);
+        return this;
+    }
+
+    public Seller vouchers(List<Voucher> vouchers) {
+        setVouchers(vouchers);
+        return this;
+    }
+
+    public Seller products(List<Product> products) {
+        setProducts(products);
+        return this;
+    }
+
 }

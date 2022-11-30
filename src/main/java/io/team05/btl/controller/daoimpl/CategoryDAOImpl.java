@@ -16,20 +16,19 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public List<Category> getAllCategory() {
-        // TODO Auto-generated method stub
-        return null;
+        return categoryRepository.findAll();
     }
 
     @Override
     public List<Category> getAllCategoryByProductId(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Integer> category_ids = categoryRepository.getAllCategoryIdByProductId(id);
+        List<Category> res = categoryRepository.findAllById(category_ids);
+        return res;
     }
 
     @Override
     public Category getCategoryById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return categoryRepository.findById(id).get();
     }
 
 }

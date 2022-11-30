@@ -18,6 +18,14 @@ import io.team05.btl.repository.*;
 public class CustomerDAOImpl implements CustomerDAO {
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    CartRepository cartRepository;
+    @Autowired
+    CommentRepository commentRepository;
+    @Autowired
+    OrderRepository orderRepository;
+    @Autowired
+    PaymentRepository paymentRepository;
 
     @Override
     public List<Product> filterInAll() {
@@ -26,51 +34,43 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public List<Product> filterInShop() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Product> searchInAll(String keyword) {
+        return customerRepository.searchInAll(keyword);
     }
 
     @Override
-    public List<Product> searchInAll() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Product> searchInShop() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Product> searchInShop(String keyword, Integer seller_id) {
+        return customerRepository.searchInShop(keyword, seller_id);
     }
 
     @Override
     public Customer getCustomerById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+        return customerRepository.findById(id).get();
     }
 
     @Override
     public Cart addCart(Cart cart) {
-        // TODO Auto-generated method stub
-        return null;
+        return cartRepository.save(cart);
     }
 
     @Override
     public Cart updateCart(Cart cart) {
-        // TODO Auto-generated method stub
-        return null;
+        return cartRepository.findById(cart.getId()).map(existedCart -> {
+            existedCart.setQuantity(cart.getQuantity());
+            return cartRepository.save(existedCart);
+        }).orElseGet(() -> {
+            return cartRepository.save(cart);
+        });
     }
 
     @Override
     public void deleteCartById(Integer id) {
-        // TODO Auto-generated method stub
-        
+        cartRepository.deleteById(id);
     }
 
     @Override
     public Order makeOrder(Order order) {
-        // TODO Auto-generated method stub
-        return null;
+        return orderRepository.save(order);
     }
 
     @Override
@@ -81,20 +81,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void deleteOrderById(Integer id) {
-        // TODO Auto-generated method stub
-        
+        orderRepository.deleteById(id);
     }
 
     @Override
     public Payment checkout(Payment payment) {
-        // TODO Auto-generated method stub
-        return null;
+        return paymentRepository.save(payment);
     }
 
     @Override
     public Comment addComment(Comment comment) {
-        // TODO Auto-generated method stub
-        return null;
+        return commentRepository.save(comment);
     }
 
     @Override
@@ -105,7 +102,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public void deleteCommentById(Integer id) {
-        // TODO Auto-generated method stub
-        
+        commentRepository.deleteById(id);
     }
 }

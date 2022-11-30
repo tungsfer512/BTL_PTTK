@@ -1,6 +1,8 @@
 package io.team05.btl.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +14,7 @@ import java.io.Serializable;
 public class ProductCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
 
     @JsonBackReference
@@ -26,8 +29,17 @@ public class ProductCategory implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     Category category;
 
+
+    public ProductCategory() {
+    }
+
+    public ProductCategory( Product product, Category category) {
+        this.product = product;
+        this.category = category;
+    }
+
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -35,7 +47,7 @@ public class ProductCategory implements Serializable {
     }
 
     public Product getProduct() {
-        return product;
+        return this.product;
     }
 
     public void setProduct(Product product) {
@@ -43,18 +55,25 @@ public class ProductCategory implements Serializable {
     }
 
     public Category getCategory() {
-        return category;
+        return this.category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
     }
 
-    public ProductCategory(Product product, Category category) {
-        this.product = product;
-        this.category = category;
+    public ProductCategory id(Integer id) {
+        setId(id);
+        return this;
     }
 
-    public ProductCategory() {
+    public ProductCategory product(Product product) {
+        setProduct(product);
+        return this;
+    }
+
+    public ProductCategory category(Category category) {
+        setCategory(category);
+        return this;
     }
 }

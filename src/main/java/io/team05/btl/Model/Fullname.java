@@ -10,24 +10,29 @@ import java.io.Serializable;
 public class Fullname implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     Integer id;
+    @JsonManagedReference
     String firstname;
+    @JsonManagedReference
     String lastname;
 
     @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "fullname", cascade = CascadeType.ALL, orphanRemoval = true)
     User user;
 
+
     public Fullname() {
     }
 
-    public Fullname(String firstname, String lastname) {
+    public Fullname( String firstname, String lastname, User user) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.user = user;
     }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
@@ -35,7 +40,7 @@ public class Fullname implements Serializable {
     }
 
     public String getFirstname() {
-        return firstname;
+        return this.firstname;
     }
 
     public void setFirstname(String firstname) {
@@ -43,7 +48,7 @@ public class Fullname implements Serializable {
     }
 
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
 
     public void setLastname(String lastname) {
@@ -51,10 +56,30 @@ public class Fullname implements Serializable {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Fullname id(Integer id) {
+        setId(id);
+        return this;
+    }
+
+    public Fullname firstname(String firstname) {
+        setFirstname(firstname);
+        return this;
+    }
+
+    public Fullname lastname(String lastname) {
+        setLastname(lastname);
+        return this;
+    }
+
+    public Fullname user(User user) {
+        setUser(user);
+        return this;
     }
 }
