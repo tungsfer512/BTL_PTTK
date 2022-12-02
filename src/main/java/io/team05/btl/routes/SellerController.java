@@ -15,8 +15,8 @@ public class SellerController {
     @Autowired
     SellerDAOImpl sellerDaoImpl;
     @GetMapping("/api/shop/{shop_id}")
-    public Seller getAllSellerById(@PathVariable Integer id) {
-        return sellerDaoImpl.getSellerById(id);
+    public Seller getAllSellerById(@PathVariable Integer shop_id) {
+        return sellerDaoImpl.getSellerById(shop_id);
     }
     
     @GetMapping("/api/shop/{shop_id}/category")
