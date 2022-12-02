@@ -34,7 +34,7 @@ public class CustomerController {
         ArrayList<Cart> carts = (ArrayList<Cart>) cartDAOImpl.getAllCartByCustomerId(id);
         HashMap<String, ArrayList<Cart>> mp = new HashMap<>();
         for (Cart cart : carts) {
-            String sellerId = cart.getProduct().getSeller().getId() + "";
+            String sellerId = cart.getProduct().getSeller().getId()+ "!!!" + cart.getProduct().getSeller().getShop();
             System.out.println(sellerId);
             if (mp.containsKey(sellerId)) {
             } else {
