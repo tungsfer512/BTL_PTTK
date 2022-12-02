@@ -23,4 +23,9 @@ public class PaymentDAOImpl implements PaymentDAO {
     public Double getTotal(List<Integer> carts) {
         return null;
     }
+
+    @Override
+    public Payment addPayment(Payment payment) {
+        return paymentRepository.save(payment);
+    }
 }
