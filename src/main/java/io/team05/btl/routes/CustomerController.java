@@ -11,10 +11,16 @@ import io.team05.btl.controller.daoimpl.CartDAOImpl;
 import io.team05.btl.controller.daoimpl.CustomerDAOImpl;
 import io.team05.btl.controller.daoimpl.PaymentDAOImpl;
 import io.team05.btl.controller.daoimpl.ProductDAOImpl;
+import io.team05.btl.model.Account;
 import io.team05.btl.model.Cart;
 import io.team05.btl.model.Customer;
+import io.team05.btl.model.Fullname;
 import io.team05.btl.model.Order;
 import io.team05.btl.model.Product;
+import io.team05.btl.model.User;
+import io.team05.btl.repository.AccountRepository;
+import io.team05.btl.repository.FullnameRepository;
+import io.team05.btl.repository.UserRepository;
 
 @RestController
 @CrossOrigin
@@ -28,6 +34,13 @@ public class CustomerController {
     ProductDAOImpl productDAOImpl;
     @Autowired
     PaymentDAOImpl paymentDAOImpl;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    FullnameRepository fullnameRepository;
+    @Autowired
+    AccountRepository accountRepository;
+
 
     @GetMapping("api/customers/{id}/cart")
     public HashMap<String, ArrayList<Cart>> getAllCartByCustomer(@PathVariable Integer id) {
@@ -85,5 +98,26 @@ public class CustomerController {
     	HashMap<String, List<Integer>> mp = (HashMap) payment;
     }
 
-    
+    @PostMapping("api/auth/register")
+    public Customer register(@RequestBody Object customer) {
+        HashMap<String, String> mp = (HashMap) customer;
+        String username = mp.get("username");
+        String password = mp.get("password");
+        String firstName = mp.get("firstName");
+        String lastName = mp.get("lastName");
+        String phone = mp.get("phone");
+        String email = mp.get("email");
+        String dob = mp.get("dob");
+        String image = mp.get("image") == null ? "https://i.imgur.com/3ZQZ9Zu.png" : mp.get("image");
+        String role = "customer";
+        
+        User user = new User(phone, email, dob, image, role);
+        User saved_user = userRepository.save(user);
+        Fullname fullname = new Fullname(firstName, lastName, saved_user);
+        Fullname saved_fullname = fullnameRepository.save(fullname);
+        Account account = new Account(username, password, saved_user);
+        Account saved_account = accountRepository.save(account);
+        Customer save_customer = new Customer(saved_user, 0.0);
+        return customerDAOImpl.register(save_customer);
+    }
 }

@@ -17,14 +17,6 @@ public class AccountController {
     @Autowired
     AccountDAOImpl accountDAOImpl;
 
-    @PostMapping("/api/auth/register")
-    public Object register(@RequestBody Object user) {
-        // HashMap<String, String> mp = (HashMap) user;
-        // Account a = new Account(mp.get("username"), mp.get("password"));
-        // System.out.println(mp);
-        return user;
-    }
-
     @GetMapping("/api/users/{id}")
     public Account getAccountById(@PathVariable Integer id) {
         return accountDAOImpl.getAccountById(id);
