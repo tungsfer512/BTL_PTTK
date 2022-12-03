@@ -1,5 +1,6 @@
 package io.team05.btl.controller.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class CustomerDAOImpl implements CustomerDAO {
     OrderRepository orderRepository;
     @Autowired
     PaymentRepository paymentRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     @Override
     public List<Product> filterInAll() {
@@ -35,7 +38,16 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public List<Product> searchInAll(String keyword) {
-        return customerRepository.searchInAll(keyword);
+        keyword = keyword.toLowerCase();
+        List<Product> list = productRepository.findAll();
+        List<Product> listRes = new ArrayList<>();
+        for (Product product : list) {
+            if(product.getTitle().toLowerCase().contains(keyword)||
+            product.getDescription().toLowerCase().contains(keyword)){
+                listRes.add(product);
+            }
+        }
+        return listRes;
     }
 
     @Override
