@@ -5,4 +5,5 @@ import io.team05.btl.model.Shipment;
 public interface ShipmentDAO {
     public Shipment getShipmentByOrderId(Integer id);
     public Shipment getShipmentById(Integer id);
+    public Shipment addShipment(Shipment sm);
 }

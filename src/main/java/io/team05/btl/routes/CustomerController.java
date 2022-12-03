@@ -60,15 +60,10 @@ public class CustomerController {
         customerDAOImpl.deleteCartById(id);
     }
     // not finish
-    @PostMapping("api/customers/{id}/orders/add")
-    public Order makeOrder(@PathVariable Integer id, @RequestBody Object order) {
-        HashMap<String, List<Integer>> mp = (HashMap) order;
-        List<Integer> carts = mp.get("carts");
-        Customer customer = customerDAOImpl.getCustomerById(id);
-        Double amount = paymentDAOImpl.getTotal(carts);
-        Order save_order = new Order(amount, "pending", customer, null);
-        return save_order;
-    }
+//    @PostMapping("api/customers/{id}/orders/add")
+//    public Order makeOrder(@PathVariable Integer id, @RequestBody Object order) {
+//        // todo
+//    }
 
     @GetMapping("api/customers/{id}")
     public Customer getCustomerById(@PathVariable Integer id) {
@@ -83,6 +78,11 @@ public class CustomerController {
     @PostMapping("api/shop/{id}/search")
     public List<Product> searchInShop(@PathVariable Integer id, @RequestParam String keyword) {
         return customerDAOImpl.searchInShop(keyword, id);
+    }
+    
+    @PostMapping("api/payment")
+    public void makeOrder(@RequestBody Object payment) {
+    	HashMap<String, List<Integer>> mp = (HashMap) payment;
     }
 
     
