@@ -2,6 +2,7 @@ package io.team05.btl.controller.dao;
 
 import java.util.List;
 
+import io.team05.btl.model.Account;
 import io.team05.btl.model.Cart;
 import io.team05.btl.model.Comment;
 import io.team05.btl.model.Customer;
@@ -24,4 +25,5 @@ public interface CustomerDAO {
     public Comment addComment(Comment comment);
     public Comment updateComment(Comment comment);
     public void deleteCommentById(Integer id);
+    public Customer register(Customer customer);
 }

@@ -6,4 +6,5 @@ import io.team05.btl.model.Cart;
 
 public interface CartDAO {
     public List<Cart> getAllCartByCustomerId(Integer id);
+    public Cart getCartById(Integer id);
 }

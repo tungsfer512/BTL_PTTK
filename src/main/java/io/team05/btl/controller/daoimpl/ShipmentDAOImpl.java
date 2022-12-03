@@ -22,5 +22,9 @@ public class ShipmentDAOImpl implements ShipmentDAO {
     public Shipment getShipmentById(Integer id) {
         return shipmentRepository.findById(id).get();
     }
-    
+
+    @Override
+    public Shipment addShipment(Shipment shipment) {
+        return shipmentRepository.save(shipment);
+    }
 }

@@ -1,11 +1,13 @@
 package io.team05.btl.controller.daoimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.team05.btl.controller.dao.CustomerDAO;
+import io.team05.btl.model.Account;
 import io.team05.btl.model.Cart;
 import io.team05.btl.model.Comment;
 import io.team05.btl.model.Customer;
@@ -26,6 +28,9 @@ public class CustomerDAOImpl implements CustomerDAO {
     OrderRepository orderRepository;
     @Autowired
     PaymentRepository paymentRepository;
+    @Autowired
+    ProductRepository productRepository;
+    AccountRepository accountRepository;
 
     @Override
     public List<Product> filterInAll() {
@@ -35,7 +40,16 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public List<Product> searchInAll(String keyword) {
-        return customerRepository.searchInAll(keyword);
+        keyword = keyword.toLowerCase();
+        List<Product> list = productRepository.findAll();
+        List<Product> listRes = new ArrayList<>();
+        for (Product product : list) {
+            if(product.getTitle().toLowerCase().contains(keyword)||
+            product.getDescription().toLowerCase().contains(keyword)){
+                listRes.add(product);
+            }
+        }
+        return listRes;
     }
 
     @Override
@@ -70,6 +84,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public Order makeOrder(Order order) {
+    	
         return orderRepository.save(order);
     }
 
@@ -103,5 +118,10 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public void deleteCommentById(Integer id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public Customer register(Customer customer) {
+        return customerRepository.save(customer);
     }
 }
