@@ -18,4 +18,9 @@ public class CartDAOImpl implements CartDAO {
     public List<Cart> getAllCartByCustomerId(Integer id) {
         return cartRepository.getAllCartByCustomerId(id);
     }
+
+    @Override
+    public Cart getCartById(Integer id){
+        return cartRepository.findById(id).get();
+    }
 }
