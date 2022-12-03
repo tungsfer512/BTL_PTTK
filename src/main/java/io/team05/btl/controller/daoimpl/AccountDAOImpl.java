@@ -12,21 +12,17 @@ import io.team05.btl.repository.*;
 public class AccountDAOImpl implements AccountDAO {
     @Autowired
     AccountRepository accountRepository;
-
-    @Override
-    public Account logIn(Account account) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Account register(Account account) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     @Override
     public Account getAccountById(Integer id) {
         return accountRepository.findById(id).get();
+    }
+    
+    @Override
+    public boolean logIn(Account account) {
+        Account existedAccount = accountRepository.getAccountByUsername(account.getUsername());
+        if (existedAccount != null && existedAccount.getPassword().equals(account.getPassword())) {
+            return true;
+        }
+        return false;
     }
 }

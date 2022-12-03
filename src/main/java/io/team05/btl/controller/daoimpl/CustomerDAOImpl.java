@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.team05.btl.controller.dao.CustomerDAO;
+import io.team05.btl.model.Account;
 import io.team05.btl.model.Cart;
 import io.team05.btl.model.Comment;
 import io.team05.btl.model.Customer;
@@ -29,6 +30,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     PaymentRepository paymentRepository;
     @Autowired
     ProductRepository productRepository;
+    AccountRepository accountRepository;
 
     @Override
     public List<Product> filterInAll() {
@@ -116,5 +118,10 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public void deleteCommentById(Integer id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public Customer register(Customer customer) {
+        return customerRepository.save(customer);
     }
 }
