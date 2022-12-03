@@ -9,12 +9,18 @@ import org.springframework.web.bind.annotation.*;
 
 import io.team05.btl.controller.daoimpl.CartDAOImpl;
 import io.team05.btl.controller.daoimpl.CustomerDAOImpl;
+import io.team05.btl.controller.daoimpl.OrderDAOImpl;
 import io.team05.btl.controller.daoimpl.PaymentDAOImpl;
 import io.team05.btl.controller.daoimpl.ProductDAOImpl;
+import io.team05.btl.controller.daoimpl.ShipmentDAOImpl;
 import io.team05.btl.model.Cart;
 import io.team05.btl.model.Customer;
 import io.team05.btl.model.Order;
+import io.team05.btl.model.OrderDetail;
+import io.team05.btl.model.Payment;
 import io.team05.btl.model.Product;
+import io.team05.btl.model.Shipment;
+import io.team05.btl.repository.ProductRepository;
 
 @RestController
 @CrossOrigin
@@ -28,6 +34,14 @@ public class CustomerController {
     ProductDAOImpl productDAOImpl;
     @Autowired
     PaymentDAOImpl paymentDAOImpl;
+    
+    @Autowired
+    OrderDAOImpl orderDAOImpl;
+    @Autowired
+    ShipmentDAOImpl shipmentDAOImpl;
+
+    @Autowired
+    ProductRepository productRepository;
 
     @GetMapping("api/customers/{id}/cart")
     public HashMap<String, ArrayList<Cart>> getAllCartByCustomer(@PathVariable Integer id) {
@@ -60,10 +74,37 @@ public class CustomerController {
         customerDAOImpl.deleteCartById(id);
     }
     // not finish
-//    @PostMapping("api/customers/{id}/orders/add")
-//    public Order makeOrder(@PathVariable Integer id, @RequestBody Object order) {
-//        // todo
-//    }
+   @PostMapping("api/customers/{id}/orders/add")
+   public Order makeOrder(@PathVariable Integer id, @RequestBody Object order) {
+        HashMap<String, String> map = (HashMap) order;
+        Customer customer = customerDAOImpl.getCustomerById(id);
+        Payment payment = paymentDAOImpl.getPaymentById(Integer.parseInt(map.get("payment_id")));
+        Shipment shipment = payment.getShipment();
+        Double amount = payment.getAmount() + shipment.getCost();
+
+        Order orderNew = new Order(amount, "pending", customer, payment);
+        customerDAOImpl.makeOrder(orderNew);
+        String listcartId = map.get("listcartId");
+        String[] listCardIdStr = listcartId.split(",");
+        List<Integer> listCardIds = new ArrayList<>();
+        for (String  i : listCardIdStr) {
+            listCardIds.add((Integer.parseInt(i)));
+        }
+        for (Integer i : listCardIds) {
+            Cart cart = cartDAOImpl.getCartById(i);
+            Product product = cart.getProduct();
+            int quantity = cart.getQuantity();
+            OrderDetail orderDetail = new OrderDetail(quantity, orderNew, product);
+            //them order detail
+            orderDAOImpl.addOrderDetail(orderDetail);
+            // xoa cart
+            customerDAOImpl.deleteCartById(i);
+            // thay doi
+            product.setQuantity(product.getQuantity()-cart.getQuantity());
+            productRepository.save(product);
+        }
+       return orderNew;
+   }
 
     @GetMapping("api/customers/{id}")
     public Customer getCustomerById(@PathVariable Integer id) {
