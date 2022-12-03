@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 
 import io.team05.btl.controller.dao.OrderDAO;
 import io.team05.btl.model.Order;
+import io.team05.btl.model.OrderDetail;
 import io.team05.btl.repository.*;
 
 @Service
 public class OrderDAOImpl implements OrderDAO {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
 
     @Override
     public HashMap<String, ArrayList<Order>> getAllOrder() {
@@ -54,5 +57,10 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public List<Order> getAllOrderByProductId(Integer id) {
         return orderRepository.getAllOrderByProductId(id);
+    }
+
+    @Override
+    public OrderDetail addOrderDetail(OrderDetail orderdetail) {
+        return orderDetailRepository.save(orderdetail);
     }
 }

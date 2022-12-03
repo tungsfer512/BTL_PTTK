@@ -30,11 +30,11 @@ public class CustomerController {
     PaymentDAOImpl paymentDAOImpl;
 
     @GetMapping("api/customers/{id}/cart")
-    public HashMap<Integer, ArrayList<Cart>> getAllCartByCustomer(@PathVariable Integer id) {
+    public HashMap<String, ArrayList<Cart>> getAllCartByCustomer(@PathVariable Integer id) {
         ArrayList<Cart> carts = (ArrayList<Cart>) cartDAOImpl.getAllCartByCustomerId(id);
-        HashMap<Integer, ArrayList<Cart>> mp = new HashMap<>();
+        HashMap<String, ArrayList<Cart>> mp = new HashMap<>();
         for (Cart cart : carts) {
-            Integer sellerId = cart.getProduct().getSeller().getId();
+            String sellerId = cart.getProduct().getSeller().getId()+ "!!!" + cart.getProduct().getSeller().getShop();
             System.out.println(sellerId);
             if (mp.containsKey(sellerId)) {
             } else {
