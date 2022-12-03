@@ -1,5 +1,7 @@
 package io.team05.btl.routes;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,5 +22,12 @@ public class AccountController {
     @GetMapping("/api/users/{id}")
     public Account getAccountById(@PathVariable Integer id) {
         return accountDAOImpl.getAccountById(id);
+    }
+
+    @PostMapping("/api/auth/login")
+    public boolean logIn(@RequestBody Object account) {
+        HashMap<String, String> req = (HashMap) account;
+        Account acc = new Account(req.get("username"), req.get("password"));
+        return accountDAOImpl.logIn(acc);
     }
 }
